@@ -13,6 +13,7 @@ import {PopupWidget} from 'react-calendly';
 import {Controls, useControl} from 'react-three-gui';
 import {PerspectiveCamera} from '@react-three/drei';
 import {useSpring} from '@react-spring/three';
+import Gui from './components/Gui';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
 	const loaded = useSelector((state) => state.loaded.value);
 	const dispatch = useDispatch();
 
+
+	const guiData = useSelector((state) => state.guiData.value);
 
 
 
@@ -76,9 +79,13 @@ function App() {
 
 
 
-		<>
+		<main>
+
+			<Gui/>
+
 			<ThemeProvider theme={theme}>
 				<Bar/>
+
 				{/*<Box*/}
 				{/*	sx={{*/}
 				{/*		textAlign: 'center',*/}
@@ -113,16 +120,15 @@ function App() {
 									{/*	</Controls.Canvas>*/}
 									{/*	<Controls/>*/}
 									{/*</Controls.Provider>*/}
-									<directionalLight color={0xfdfbd3} intensity={0.5} position={[-1, 0.5, 1]}/>
-									<directionalLight color={0xfdfbd3} intensity={0.5} position={[1, 0.5, 1]}/>
+									<directionalLight color={0xfdfbd3} intensity={guiData.dirLightInt} position={[guiData.dirLightPosX, 0.5, 1]}/>
+									{/*<directionalLight color={0xfdfbd3} intensity={0.5} position={[1, 0.5, 1]}/>*/}
 								</Provider>
 							</Canvas>)}
 					</ReactReduxContext.Consumer>
 					{/*<Info macOrientation={macOrientationNumber}/>*/}
 				</Box>
 			</ThemeProvider>
-		</>
-
+		</main>
 	);
 }
 
